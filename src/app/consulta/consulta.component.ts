@@ -23,7 +23,7 @@ import { Cliente } from '../cadastro/cliente';
   templateUrl: './consulta.component.html',
   styleUrl: './consulta.component.scss'
 })
-export class ConsultaComponent {
+export class ConsultaComponent implements OnInit {
 
   listaClientes: Cliente[] = [];
 
@@ -33,7 +33,7 @@ export class ConsultaComponent {
   
   ngOnInit(){
 
-    this.listaClientes = this,this.service.pesquisarCliente (' ');
+    this.listaClientes = this.service.pesquisarCliente (' ');
 
   }
 
