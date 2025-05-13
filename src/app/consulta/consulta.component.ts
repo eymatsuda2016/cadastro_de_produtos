@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,7 +19,8 @@ import { Cliente } from '../cadastro/cliente';
              MatIconModule,
              FormsModule,
              MatTableModule,
-             MatButtonModule
+             MatButtonModule,
+             CommonModule
   ],
   templateUrl: './consulta.component.html',
   styleUrl: './consulta.component.scss'
@@ -26,6 +28,7 @@ import { Cliente } from '../cadastro/cliente';
 export class ConsultaComponent implements OnInit {
 
   listaClientes: Cliente[] = [];
+  colunasTable: string[] = [ "id", "nome", "cpf", "dataNascimento", "email" ];
 
   constructor(private service: ClienteService){
 
