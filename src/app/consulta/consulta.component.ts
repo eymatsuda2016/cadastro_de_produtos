@@ -13,45 +13,56 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-consulta',
-  imports: [ MatInputModule,
-             MatCardModule,
-             FlexLayoutModule,
-             MatInputModule,
-             MatIconModule,
-             FormsModule,
-             MatTableModule,
-             MatButtonModule,
-             CommonModule
+  imports: [MatInputModule,
+    MatCardModule,
+    FlexLayoutModule,
+    MatInputModule,
+    MatIconModule,
+    FormsModule,
+    MatTableModule,
+    MatButtonModule,
+    CommonModule
   ],
   templateUrl: './consulta.component.html',
   styleUrl: './consulta.component.scss'
 })
 export class ConsultaComponent implements OnInit {
 
-  nomeBusca: string= ' ';
+  nomeBusca: string = ' ';
   listaClientes: Cliente[] = [];
-  colunasTable: string[] = [ "id", "nome", "cpf", "dataNascimento", "email", "acoes" ];
+  colunasTable: string[] = ["id", "nome", "cpf", "dataNascimento", "email", "acoes"];
+ 
 
   constructor(
     private service: ClienteService,
-    private  router: Router
+    private router: Router
 
-  ){
-    
-  }
-  
-  ngOnInit(){
-
-    this.listaClientes = this.service.pesquisarCliente (' ');
+  ) {
 
   }
 
-  pesquisar(){
+  ngOnInit() {
+
+    this.listaClientes = this.service.pesquisarCliente(' ');
+
+  }
+
+  pesquisar() {
     this.listaClientes = this.service.pesquisarCliente(this.nomeBusca);
   }
 
-  preparaEditar(id: string){
-    this.router.navigate(['/cadastro'], {queryParams: {"id": id} } )
+  preparaEditar(id: string) {
+    this.router.navigate(['/cadastro'], { queryParams: { "id": id } })
+  }
+
+  preparaDeletar(cliente: Cliente) {
+    cliente.deletando = true;
+  }
+
+  deletar(cliente: Cliente) {
+    this.service.deletar(cliente);
+    this.listaClientes = this.service.pesquisarCliente(' ');
+
   }
 
 }
