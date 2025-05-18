@@ -34,9 +34,10 @@
                         <div fxLayout = "column" fxFlex = "200px"> 
                             <mat-form-field class="full-width">
                                 <mat-label>CPF *</mat-label>
-                                <input type="text" 
+                                <input type="cpf" 
                                 [(ngModel)]="cliente.cpf"
                                 name="cpf"
+                                mask="000.000.000-00"
                                 placeholder="Digite o seu cpf" matInput/>
                             </mat-form-field>
                         </div> 
@@ -49,6 +50,7 @@
                                 <input type="text" 
                                 [(ngModel)]="cliente.dataNascimento"
                                 name="dataNascimento"
+                                mask="00/00/0000"
                                 placeholder="Digite a sua data de Nascimento" matInput/>
                             </mat-form-field>
                         </div> 

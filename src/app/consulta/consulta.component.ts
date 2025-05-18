@@ -10,7 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 import { ClienteService } from '../cliente.service';
 import { Cliente } from '../cadastro/cliente';
 import { Router } from '@angular/router';
-
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 @Component({
   selector: 'app-consulta',
   imports: [MatInputModule,
@@ -21,8 +21,10 @@ import { Router } from '@angular/router';
     FormsModule,
     MatTableModule,
     MatButtonModule,
-    CommonModule
+    CommonModule,
+    NgxMaskDirective
   ],
+  
   templateUrl: './consulta.component.html',
   styleUrl: './consulta.component.scss'
 })
