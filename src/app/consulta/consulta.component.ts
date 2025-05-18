@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
@@ -7,10 +7,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClienteService } from '../cliente.service';
 import { Cliente } from '../cadastro/cliente';
 import { Router } from '@angular/router';
-import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+
 @Component({
   selector: 'app-consulta',
   imports: [MatInputModule,
@@ -22,7 +23,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     MatTableModule,
     MatButtonModule,
     CommonModule,
-    NgxMaskDirective
+
   ],
   
   templateUrl: './consulta.component.html',
@@ -33,6 +34,7 @@ export class ConsultaComponent implements OnInit {
   nomeBusca: string = ' ';
   listaClientes: Cliente[] = [];
   colunasTable: string[] = ["id", "nome", "cpf", "dataNascimento", "email", "acoes"];
+  snack: MatSnackBar = inject(MatSnackBar);
  
 
   constructor(
@@ -64,7 +66,7 @@ export class ConsultaComponent implements OnInit {
   deletar(cliente: Cliente) {
     this.service.deletar(cliente);
     this.listaClientes = this.service.pesquisarCliente(' ');
-
+    this.snack.open('Item Deletado com Sucesso', 'OK');
   }
 
 }
