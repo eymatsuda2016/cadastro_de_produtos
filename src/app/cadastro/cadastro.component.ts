@@ -12,6 +12,8 @@ import { ClienteService } from '../cliente.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { query } from '@angular/animations';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { BrasilapiService } from '../brasilapi.service';
+import { Estado, Municipio } from '../brasilapi.model';
 
 @Component({
   selector: 'app-cadastro',
@@ -35,14 +37,15 @@ export class CadastroComponent implements OnInit {
 
   cliente: Cliente = Cliente.newCliente();
   atualizando: boolean = false;
-  snack: MatSnackBar = inject(MatSnackBar)
+  snack: MatSnackBar = inject(MatSnackBar);
+  estados: Estado[] = [];
+  municipios: Municipio[] = [];
 
   constructor(private service: ClienteService,
+    private brasilApiService: BrasilapiService,
     private route: ActivatedRoute,
     private router: Router
-  ) {
-
-  }
+  ) {}
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((query: any) => {
@@ -56,6 +59,16 @@ export class CadastroComponent implements OnInit {
         }
       }
     })
+
+    this.carregarUfs();
+  }
+
+  carregarUfs(){
+    this.brasilApiService.listarUFs().subscribe({
+      next:listaEstados => console.log("lista estados", listaEstados),
+      error: erro => console.log("ocooreu im erro: ", erro)
+    })
+    
   }
 
   salvar() {
