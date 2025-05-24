@@ -44,7 +44,7 @@
                     </div> 
                      
                      <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="16px">
-                        <div fxLayout = "column" fxFlex = "200px">
+                         <div fxLayout = "column" fxFlex = "200px"> 
                             <mat-form-field class="full-width">
                                 <mat-label>Data Nascimento: *</mat-label>
                                 <input type="text" 
@@ -55,7 +55,19 @@
                             </mat-form-field>
                         </div> 
                     </div>
-            
+
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="16px">
+                         <div fxLayout = "column" fxFlex = "200px"> 
+                            <mat-form-field class="full-width">
+                                <mat-label>UF: *</mat-label>
+                               <mat-select>
+                                <mat-option *ngFor="let uf of estados" [value]="uf.sigla" >
+                                    {{ uf.sigla }} - {{ uf.nome }}
+                                </mat-option>
+                               </mat-select>
+                            </mat-form-field>
+                        </div> 
+                    </div>
                 </mat-card-content>
                 <mat-card-actions>
                     @if(!atualizando){
